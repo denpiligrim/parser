@@ -1,0 +1,1390 @@
+{
+  "data": {
+    "products": {
+      "data": [
+        {
+          "code": 8290480,
+          "fullName": "Стиральная машина встраиваемая Beko WITC7613XW",
+          "link": "/builtin_washing_machines/witc7613xw_beko.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8290/480/witc7613xw_beko_64534c218243b.jpeg",
+          "price": 1599,
+          "oldPrice": 2199,
+          "discountTypes": [
+            "discount"
+          ],
+          "promoDiscount": 27,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "beko",
+            "name": "Beko"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 44152729,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8290/480/witc7613xw_beko_64534c218243b.jpeg",
+                "position": 1,
+                "isMain": true
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 6979980,
+          "fullName": "Стиральная машина встраиваемая Krona Kaya 1200 7K / 00002162 (белый)",
+          "link": "/builtin_washing_machines/kaya12007k00002162_kronasteel.html",
+          "rating": 5,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6979/980/kaya12007k00002162_kronasteel_66b20604091d0.jpeg",
+          "price": 1799,
+          "oldPrice": 1899,
+          "discountTypes": [
+            "discount"
+          ],
+          "promoDiscount": 5,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "kronasteel",
+            "name": "Krona"
+          },
+          "reviewCount": 2,
+          "gallery": {
+            "images": [
+              {
+                "id": 59984689,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6979/980/kaya12007k00002162_kronasteel_66b20604091d0.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 41686544,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6979/980/kaya12007k00002162_kronasteel_63ecf72ad26d3.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 41686549,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6979/980/kaya12007k00002162_kronasteel_63ecf72ed1c1b.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 41686554,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6979/980/kaya12007k00002162_kronasteel_63ecf73278e5a.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 41686559,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6979/980/kaya12007k00002162_kronasteel_63ecf73612484.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 6978288,
+          "fullName": "Стиральная машина встраиваемая Krona Kalisa 1400 8K / 00002163 (белый)",
+          "link": "/builtin_washing_machines/kalisa14008k00002163_kronasteel.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6978/288/kalisa14008k00002163_kronasteel_63ecf2b2212cd.jpeg",
+          "price": 1799,
+          "oldPrice": 2429.07,
+          "discountTypes": [
+            "discount"
+          ],
+          "promoDiscount": 26,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "kronasteel",
+            "name": "Krona"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 41685694,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6978/288/kalisa14008k00002163_kronasteel_63ecf2b2212cd.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 41685709,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6978/288/kalisa14008k00002163_kronasteel_63ecf2b551d41.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 41685719,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6978/288/kalisa14008k00002163_kronasteel_63ecf2b96b992.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 41685724,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6978/288/kalisa14008k00002163_kronasteel_63ecf2bd3b14c.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 41685729,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6978/288/kalisa14008k00002163_kronasteel_63ecf2c024e75.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 6186166,
+          "fullName": "Стиральная машина встраиваемая Maunfeld MBWM148S",
+          "link": "/builtin_washing_machines/mbwm148s_maunfeld.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6186/166/mbwm148s_maunfeld_5f75932a933e9.jpeg",
+          "price": 2339,
+          "oldPrice": 0,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "maunfeld",
+            "name": "Maunfeld"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 19654376,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6186/166/mbwm148s_maunfeld_5f75932a933e9.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 19654386,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6186/166/mbwm148s_maunfeld_5f759340932d8.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 19654456,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6186/166/mbwm148s_maunfeld_5f759342c4fd6.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 19654461,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6186/166/mbwm148s_maunfeld_5f759342e08e2.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 19654381,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/6186/166/mbwm148s_maunfeld_5f7593406e54e.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 8499595,
+          "fullName": "Стиральная машина встраиваемая Electrolux EW7N7F348SIP",
+          "link": "/builtin_washing_machines/ew7n7f348sip_electrolux.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8499/595/ew7n7f348sip_electrolux_654b9c9fcc63c.jpeg",
+          "price": 3899,
+          "oldPrice": 4366.88,
+          "discountTypes": [
+            "discount"
+          ],
+          "promoDiscount": 11,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "electrolux",
+            "name": "Electrolux"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 49750409,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8499/595/ew7n7f348sip_electrolux_654b9c9fcc63c.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 49750414,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8499/595/ew7n7f348sip_electrolux_654b9ca07572e.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 49750419,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8499/595/ew7n7f348sip_electrolux_654b9ca0e7313.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 49750424,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8499/595/ew7n7f348sip_electrolux_654b9ca1a9b1e.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 49750429,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8499/595/ew7n7f348sip_electrolux_654b9ca27b980.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 8256320,
+          "fullName": "Стиральная машина встраиваемая Bosch WIW28542EU",
+          "link": "/builtin_washing_machines/wiw28542eu_bosch.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8256/320/wiw28542eu_bosch_653e5ce0a9da2.jpeg",
+          "price": 4999,
+          "oldPrice": 5598.88,
+          "discountTypes": [
+            "discount"
+          ],
+          "promoDiscount": 11,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "bosch",
+            "name": "Bosch"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 49513079,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8256/320/wiw28542eu_bosch_653e5ce0a9da2.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 49513084,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8256/320/wiw28542eu_bosch_653e5ce150557.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 49513089,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8256/320/wiw28542eu_bosch_653e5ce202f61.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 49513094,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8256/320/wiw28542eu_bosch_653e5ce2a66fd.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 49513099,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8256/320/wiw28542eu_bosch_653e5ce357d7a.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 8527274,
+          "fullName": "Стиральная машина встраиваемая Electrolux EW8F348SCI",
+          "link": "/builtin_washing_machines/ew8f348sci_electrolux.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8527/274/ew8f348sci_electrolux_64fad86c9d9c7.jpeg",
+          "price": 4445.32,
+          "oldPrice": 0,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "electrolux",
+            "name": "Electrolux"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 47982459,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8527/274/ew8f348sci_electrolux_64fad86c9d9c7.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 47982464,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8527/274/ew8f348sci_electrolux_64fad86d3ecfa.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 47982469,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8527/274/ew8f348sci_electrolux_64fad86dd0307.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 47982474,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8527/274/ew8f348sci_electrolux_64fad86e6c48f.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 47982479,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8527/274/ew8f348sci_electrolux_64fad86f21a27.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 8184885,
+          "fullName": "Стиральная машина встраиваемая Bosch WIW24342EU",
+          "link": "/builtin_washing_machines/wiw24342eu_bosch.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8184/885/wiw24342eu_bosch_9ed7cec5229890d62e35f78a367ee875.jpg",
+          "price": 4469.53,
+          "oldPrice": 0,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "bosch",
+            "name": "Bosch"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 800921695,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8184/885/wiw24342eu_bosch_9ed7cec5229890d62e35f78a367ee875.jpg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 800921696,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8184/885/wiw24342eu_bosch_f038a6ef5e7bb7b0431de387a1586fc0.jpg",
+                "position": 1,
+                "isMain": false
+              },
+              {
+                "id": 800921697,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8184/885/wiw24342eu_bosch_b2692ecf369089dcd6a2234cca151a6b.jpg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 800921698,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8184/885/wiw24342eu_bosch_b1d736565f1e283fd1a1b3e0cbbcbb56.jpg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 800921699,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8184/885/wiw24342eu_bosch_2388c5549cbc6b8d378635dd88566c23.jpg",
+                "position": 4,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 9462407,
+          "fullName": "Стиральная машина встраиваемая LG F4V9LD2W",
+          "link": "/builtin_washing_machines/f4v9ld2w_lg_9462407.html",
+          "rating": 0,
+          "preview": null,
+          "price": 3118.07,
+          "oldPrice": 0,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "request",
+          "multiple": 1,
+          "producer": {
+            "id": "lg",
+            "name": "LG"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": []
+          },
+          "sales": []
+        },
+        {
+          "code": 8533077,
+          "fullName": "Стиральная машина встраиваемая AEG L8FBE48SCI",
+          "link": "/builtin_washing_machines/l8fbe48sci_aeg.html",
+          "rating": 0,
+          "preview": null,
+          "price": 3990,
+          "oldPrice": 0,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "aeg",
+            "name": "AEG"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": []
+          },
+          "sales": []
+        },
+        {
+          "code": 9070671,
+          "fullName": "Стиральная машина встраиваемая AEG L7FNE48SI",
+          "link": "/builtin_washing_machines/l7fne48si_aeg_9070671.html",
+          "rating": 0,
+          "preview": null,
+          "price": 4132.4,
+          "oldPrice": 0,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "in",
+          "multiple": 1,
+          "producer": {
+            "id": "aeg",
+            "name": "AEG"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": []
+          },
+          "sales": []
+        },
+        {
+          "code": 8357298,
+          "fullName": "Стиральная машина встраиваемая Zigmund & Shtain BWM 03",
+          "link": "/builtin_washing_machines/bwm03_zigmund_shtain.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8357/298/bwm03_zigmund_shtain_64eee0eb3e5bb.jpeg",
+          "price": null,
+          "oldPrice": null,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "out",
+          "multiple": 1,
+          "producer": {
+            "id": "zigmund_shtain",
+            "name": "Zigmund & Shtain"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 47667104,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8357/298/bwm03_zigmund_shtain_64eee0eb3e5bb.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 47667114,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8357/298/bwm03_zigmund_shtain_64eee0ec24e12.jpeg",
+                "position": 2,
+                "isMain": false
+              },
+              {
+                "id": 47667119,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8357/298/bwm03_zigmund_shtain_64eee0ec9c03e.jpeg",
+                "position": 3,
+                "isMain": false
+              },
+              {
+                "id": 47667124,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8357/298/bwm03_zigmund_shtain_64eee0ed3200c.jpeg",
+                "position": 4,
+                "isMain": false
+              },
+              {
+                "id": 47667134,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8357/298/bwm03_zigmund_shtain_64eee0ee419e8.jpeg",
+                "position": 5,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        },
+        {
+          "code": 9327162,
+          "fullName": "Стиральная машина встраиваемая Hiberg i-DDQ11-1014 W",
+          "link": "/builtin_washing_machines/iddq111014w_hiberg_9327162.html",
+          "rating": 0,
+          "preview": null,
+          "price": null,
+          "oldPrice": null,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "out",
+          "multiple": 1,
+          "producer": {
+            "id": "hiberg",
+            "name": "Hiberg"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": []
+          },
+          "sales": []
+        },
+        {
+          "code": 8030400,
+          "fullName": "Стиральная машина встраиваемая Korting KWMI 1480 WI",
+          "link": "/builtin_washing_machines/kwmi1480wi_korting.html",
+          "rating": 0,
+          "preview": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8030/400/kwmi1480wi_korting_63ecec18893dd.jpeg",
+          "price": null,
+          "oldPrice": null,
+          "discountTypes": [],
+          "promoDiscount": 0,
+          "status": "out",
+          "multiple": 1,
+          "producer": {
+            "id": "korting",
+            "name": "Korting"
+          },
+          "reviewCount": 0,
+          "gallery": {
+            "images": [
+              {
+                "id": 41683969,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8030/400/kwmi1480wi_korting_63ecec18893dd.jpeg",
+                "position": 1,
+                "isMain": true
+              },
+              {
+                "id": 41683974,
+                "url": "https://cdn21vek.by/imgproxy/preview/plain/img/galleries/8030/400/kwmi1480wi_korting_63ecec1c734a0.jpeg",
+                "position": 2,
+                "isMain": false
+              }
+            ]
+          },
+          "sales": []
+        }
+      ],
+      "meta": {
+        "total": 14,
+        "perPage": 60,
+        "currentPage": 1,
+        "lastPage": 1
+      }
+    },
+    "category": {
+      "alias": "builtin_washing_machines",
+      "name": "Стиральные машины встраиваемые",
+      "templateId": 3773,
+      "tags": [],
+      "breadcrumbs": [
+        {
+          "name": "Бытовая техника",
+          "link": "/kitchen/"
+        },
+        {
+          "name": "Техника для ухода за одеждой",
+          "link": "/clothing_care_appliances/"
+        }
+      ]
+    },
+    "categoryContent": "<p>Стиральные машины встраиваемые – выигрышный вариант с точки зрения дизайна и эргономики пространства. Бытовая техника легко впишется в интерьер кухни или ванной комнаты.</p><br>\r\n<h2>Разновидности современных стиральных машин</h2>\r\n<ul style=\"list-style: disc!important; padding: 0; margin-left: 20px;\">\r\n<li>Полностью встраиваемые стиральные машины;</li>\r\n<li>Под столешницу;</li>\r\n<li>В нишу.</li>\r\n</ul><br>\r\n<h2>Как правильно выбрать встраиваемую стиральную машину?</h2>\r\n<ul style=\"list-style: disc!important; padding: 0; margin-left: 20px;\">\r\n<li>Габариты. Ключевой критерий при выборе бытовой техники. Перед приобретением машины рекомендуется несколько раз замерить площадь места, куда она будет встроена. И только после этого делать выбор.</li>\r\n<li>Программы стирки. Стиральные машины предоставляют следующие функции: стирка синтетики, спортивных вещей, хлопка, шерсти, деликатная/ручная стирка. Есть техника с дополнительными режимами освежающей стирки, самоочистки и другими.</li>\r\n<li>Класс энергопотребления. От характеристики зависит экономичность модели. Машинки с классом «А++» считаются самыми эффективными.</li>\r\n<li>Загрузка. Для небольшой семьи из 2-3 человек стоит выбирать технику на 3 кг. Более «объемные» варианты (на 5, 6 или 7 кг) требуют больше пространства для встраивания.</li>\r\n<li>Место встраивания и мебель. Стиральные машины можно установить в свободные ниши, в кухонный шкаф или под варочную поверхность. Все зависит от проекта дизайна, желаний хозяев и свободных площадей.</li>\r\n<li>Производитель. На рынке предоставлены модели от Hotpoint, Bosch, Zanussi, Electrolux, Beko, Whirlpool, AEG и других производителей.</li>\r\n<li>Цены на встраиваемую технику выше, чем на обычные стиральные машины. Но те преимущества, которые получают хозяева дома, с лихвой компенсируют стоимость.</li>\r\n</ul><br>\r\n<p>Если вам необходимо купить встраиваемую стиральную машину, ассортимент интернет-магазина к вашим услугам. А наши специалисты готовы проконсультировать вас по всем возникающим вопросам по поводу выбора и установки техники.</p>\r\n",
+    "categoryRecommendedLinks": {
+      "related": [
+        {
+          "name": "Стиральные машины",
+          "link": "washing_machines/"
+        },
+        {
+          "name": "Средства для стирки",
+          "link": "laundry_care/"
+        }
+      ],
+      "recipe": []
+    },
+    "reference": {
+      "alias": "all",
+      "name": null
+    },
+    "region": {
+      "alias": null,
+      "name": null
+    },
+    "producer": {
+      "name": null,
+      "alias": null
+    },
+    "attributeStructure": [
+      {
+        "id": 93103,
+        "name": "Тип",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 10
+      },
+      {
+        "id": 93133,
+        "name": "Тип встраивания",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "<b>Полностью встраиваемые</b> — полностью можно спрятать за панелями кухонной мебели. Такая машина должна быть оборудована специальными петлями, которые крепятся к лицевой панели машины, справа или слева. \r\n",
+        "position": 11
+      },
+      {
+        "id": 93573,
+        "name": "Класс энергопотребления",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "По экономичности энергопотребления стиральные машины делятся по классам от А до G. От очень экономичного до экономичного класса маркируются буквами А, В, С. Минимальное потребление электроэнергии обеспечивают машины \"A+\", \"А++\" и \"А+++\".",
+        "position": 12
+      },
+      {
+        "id": 93203,
+        "name": "Способ загрузки белья",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "Фронтальная загрузка белья осуществляется через круглый люк, который расположен спереди.",
+        "position": 13
+      },
+      {
+        "id": 93163,
+        "name": "Максимальная загрузка",
+        "unit": "кг",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "Максимальная загрузка показывает, сколько сухого белья можно загрузить в машинку. Измеряется в килограммах.",
+        "position": 14
+      },
+      {
+        "id": 93733,
+        "name": "Максимальная загрузка для сушки",
+        "unit": "",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 15
+      },
+      {
+        "id": 93253,
+        "name": "Максимальная скорость отжима",
+        "unit": "об/мин",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 16
+      },
+      {
+        "id": 93193,
+        "name": "Инверторная технология",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 17
+      },
+      {
+        "id": 93173,
+        "name": "Прямой привод",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 18
+      },
+      {
+        "id": 93453,
+        "name": "Быстрая стирка",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Режим позволяет быстро и качественно отстирать слабозагрязненную одежду.",
+        "position": 19
+      },
+      {
+        "id": 93413,
+        "name": "Дополнительное полоскание",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 20
+      },
+      {
+        "id": 93363,
+        "name": "Обработка паром",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 21
+      },
+      {
+        "id": 93433,
+        "name": "Самоочистка",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 22
+      },
+      {
+        "id": 93423,
+        "name": "Легкая глажка",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Специальный режим, который сменяет отжим. В таком режиме белье меньше мнется, что значительно облегчает последующий процесс глажки.",
+        "position": 23
+      },
+      {
+        "id": 93353,
+        "name": "Возможность дозагрузки во время стирки",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "В зависимости от стиральной машины функция «Дозагрузки белья» может быть реализована различными способами: <br>\r\n﻿1 – наличие специального дополнительного люка загрузки; <br>\r\n﻿2 – наличие специальной функции «Дозагрузка белья» при помощи отдельной кнопки Старт/Пауза, благодаря которой можно приостановить цикл стирки и открыть дверцу (только после слива воды ниже уровня люка и понижения температуры воды); <br>\r\n﻿3 – специальный алгоритм действий, который включает в себя полную остановку цикла стирки и полный слив воды, а после дозагрузки белья цикл стирки необходимо запустить сначала.",
+        "position": 24
+      },
+      {
+        "id": 93743,
+        "name": "Режимы сушки",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 25
+      },
+      {
+        "id": 93463,
+        "name": "Автоматические программы",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 26
+      },
+      {
+        "id": 93443,
+        "name": "Количество программ",
+        "unit": "",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "Возможность выбора программы стирки. Программы стирки характеризуются разной скоростью вращения барабана в режиме стирки, длительностью, количеством полосканий, диапазоном температур и другими параметрами.",
+        "position": 27
+      },
+      {
+        "id": 93373,
+        "name": "Предварительная стирка",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 28
+      },
+      {
+        "id": 93383,
+        "name": "Интенсивная стирка/удаление пятен",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 29
+      },
+      {
+        "id": 93483,
+        "name": "Индикация",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 30
+      },
+      {
+        "id": 93473,
+        "name": "Управление",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "Электронное управление позволяет выбирать программы стирки и настраивать параметры индивидуально с помощью поворотных регуляторов либо кнопок. Сенсорное управление позволяет сделать то же самое нажатием на сенсорный дисплей. Механическое управление позволяет настроить параметры стирки только с помощью поворотных регуляторов и не включает программ стирки.",
+        "position": 31
+      },
+      {
+        "id": 93323,
+        "name": "Технологии",
+        "unit": "",
+        "type": "multiple",
+        "subtype": "default",
+        "range": 0,
+        "description": "Технология <b>6 движений заботы</b> позволяет барабану вращаться шестью различными способами. Машина автоматически подбирает оптимальные  движения, для более эффективной и бережной стирки для разных типов ткани и загрязнений.<br>\r\n<b>Prime Technology</b> автоматически устанавливает необходимое количество воды и оптимизирует затраты электроэнергии в зависимости от количества загруженных вещей. <br>\r\nТехнология пузырьковой стирки <b>Eco Bubble</b> обеспечивает более глубокое проникновение моющего средства в ткань, что позволяет отстирывать одежду с меньшим износом ткани, экономить стиральный порошок, сокращать время стирки.<br> \r\n<b>3D Washing</b> благодаря форме корпуса и особенностям движения барабана обеспечивает равномернее перемещение вещей с более эффективной обработкой моющими средствами и позволяет сокращать время стирки. <br>\r\n<b>6th Sense Colours</b> обеспечивает оптимизацию цикла и экономное расходование ресурсов: взвешивает белье, контролирует и регулирует процесс стирки, сохраняет цвета вещей и качественно стирает даже в холодной воде, учитывает определенный набор цветов вещей. <br>\r\n<b>SimplyFi</b> подразумевает встроенный модуль Wi-Fi, позволяющий контролировать стиральную машину и управлять ею, даже когда вас нет дома. <br> \r\n<b>Direct Injection</b> позволяет моющему порошку с первых минут поступления внутрь барабана преобразоваться в пенку, которая обладает на 60% большей эффективностью в отстирывании пятен. Позволяет стирать белые и цветные вещи вместе уже при температуре 20°. Результат стирки будет такой же как при температуре 40°. <br>\r\nСенсор загрузки <b>Total Weight Control</b> обеспечивает низкое потребление воды и энергии, уменьшение времени стирки и бесшумную работу.",
+        "position": 32
+      },
+      {
+        "id": 93143,
+        "name": "Класс стирки",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "Показатель качества стирки – эффективность удаления загрязнений с ткани. Наилучшее качество стирки обеспечивает класс \"A\" и \"B\".",
+        "position": 33
+      },
+      {
+        "id": 93783,
+        "name": "Класс сушки",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 34
+      },
+      {
+        "id": 93243,
+        "name": "Класс отжима",
+        "unit": "",
+        "type": "select",
+        "subtype": "default",
+        "range": 0,
+        "description": "Показатель качества отжима. Выделяется 7 классов отжима от A до G. Наиболее качественный отжим обеспечивает класс \"A\", очень хороший \"B\", хороший \"С\", остальные классы обеспечивают невысокую эффективность отжима.",
+        "position": 35
+      },
+      {
+        "id": 93283,
+        "name": "Уровень шума отжима",
+        "unit": "дБ",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 36
+      },
+      {
+        "id": 93633,
+        "name": "Высота",
+        "unit": "см",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 37
+      },
+      {
+        "id": 93643,
+        "name": "Ширина",
+        "unit": "см",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 38
+      },
+      {
+        "id": 93653,
+        "name": "Глубина",
+        "unit": "см",
+        "type": "number",
+        "subtype": "default",
+        "range": 0,
+        "description": "Указанное значение соответствует глубине верхней крышки стиральной машины ",
+        "position": 39
+      },
+      {
+        "id": 93513,
+        "name": "Отложенный старт",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Таймер отсрочки запуска стирки. Максимальный период отсрочки стирки составляет 24 часа.",
+        "position": 40
+      },
+      {
+        "id": 93803,
+        "name": "Ускоренная стирка",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Отдельная функция позволяющая сократить время основной программы стирки.",
+        "position": 41
+      },
+      {
+        "id": 93543,
+        "name": "Защита от протечек",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Защита от протечек обеспечивается за счет целостности системы подачи и слива воды, и контролируется с помощью датчиков. В случае протечек, прекращается подачу воды.",
+        "position": 42
+      },
+      {
+        "id": 93533,
+        "name": "Защита от детей",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Функция, обеспечивающая безопасность эксплуатации. Позволяет заблокировать панель управления стиральной машины, что препятствует изменению программы стирки.",
+        "position": 43
+      },
+      {
+        "id": 93613,
+        "name": "Горячее водоснабжение",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 44
+      },
+      {
+        "id": 93753,
+        "name": "Контроль сушки по влажности",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 45
+      },
+      {
+        "id": 93303,
+        "name": "Отдельный регулятор температуры",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Отдельная кнопка или колесико для установки температуры. Доступный диапазон температур зависит от программы стирки.",
+        "position": 46
+      },
+      {
+        "id": 93493,
+        "name": "Звуковой сигнал об окончании стирки",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "Звуковой сигнал сообщает о завершении стирки.",
+        "position": 47
+      },
+      {
+        "id": 93523,
+        "name": "Подсветка барабана",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 48
+      },
+      {
+        "id": 192434,
+        "name": "Premium",
+        "unit": "",
+        "type": "bit",
+        "subtype": "default",
+        "range": 0,
+        "description": "",
+        "position": 49
+      }
+    ],
+    "filterValues": {
+      "priceRange": {
+        "min": 1599,
+        "max": 4999
+      },
+      "producersTotal": 10,
+      "producers": {
+        "values": [
+          {
+            "id": "kronasteel",
+            "name": "Krona"
+          },
+          {
+            "id": "beko",
+            "name": "Beko"
+          },
+          {
+            "id": "maunfeld",
+            "name": "Maunfeld"
+          },
+          {
+            "id": "bosch",
+            "name": "Bosch"
+          },
+          {
+            "id": "electrolux",
+            "name": "Electrolux"
+          },
+          {
+            "id": "aeg",
+            "name": "AEG"
+          },
+          {
+            "id": "hiberg",
+            "name": "Hiberg"
+          },
+          {
+            "id": "korting",
+            "name": "Korting"
+          }
+        ],
+        "expandable": true
+      },
+      "selectedProducers": [],
+      "discountTypes": {
+        "values": [
+          {
+            "id": "discount",
+            "name": "Товары со скидкой"
+          }
+        ],
+        "expandable": false
+      },
+      "selectedDiscountTypes": [],
+      "attributeValues": {
+        "93103": {
+          "values": [
+            {
+              "id": 747973,
+              "name": "стиральная машина встраиваемая",
+              "key": "0000000001 747973"
+            },
+            {
+              "id": 751113,
+              "name": "стирально-сушильная машина встраиваемая",
+              "key": "0000000002 751113"
+            }
+          ],
+          "expandable": false
+        },
+        "93133": {
+          "values": [
+            {
+              "id": 749743,
+              "name": "полностью встраиваемая",
+              "key": "0000000001 749743"
+            },
+            {
+              "id": 749753,
+              "name": "под столешницу",
+              "key": "0000000002 749753"
+            }
+          ],
+          "expandable": false
+        },
+        "93143": {
+          "values": [
+            {
+              "id": 749793,
+              "name": "A",
+              "key": "0000000001 749793"
+            }
+          ],
+          "expandable": false
+        },
+        "93203": {
+          "values": [
+            {
+              "id": 749903,
+              "name": "фронтальный",
+              "key": "0000000001 749903"
+            }
+          ],
+          "expandable": false
+        },
+        "93243": {
+          "values": [
+            {
+              "id": 749983,
+              "name": "A",
+              "key": "0000000001 749983"
+            },
+            {
+              "id": 749993,
+              "name": "B",
+              "key": "0000000002 749993"
+            }
+          ],
+          "expandable": false
+        },
+        "93323": {
+          "values": [
+            {
+              "id": 3342899,
+              "name": "FreshScent (Electrolux)",
+              "key": "0000000002 3342899"
+            },
+            {
+              "id": 3342894,
+              "name": "Fuzzy Logic (Electrolux)",
+              "key": "0000000003 3342894"
+            },
+            {
+              "id": 3342889,
+              "name": "Speed Perfect (Bosch)",
+              "key": "0000000004 3342889"
+            },
+            {
+              "id": 3342884,
+              "name": "Vario Soft (Bosch)",
+              "key": "0000000005 3342884"
+            },
+            {
+              "id": 3342879,
+              "name": "Eco Silence Drive (Bosch)",
+              "key": "0000000006 3342879"
+            },
+            {
+              "id": 3000134,
+              "name": "Touch Control (Korting)",
+              "key": "0000000007 3000134"
+            },
+            {
+              "id": 1624681,
+              "name": "Ecoball (Maunfeld)",
+              "key": "0000000009 1624681"
+            },
+            {
+              "id": 1624616,
+              "name": "Easy Logic (Maunfeld)",
+              "key": "0000000010 1624616"
+            }
+          ],
+          "expandable": true
+        },
+        "93373": {
+          "values": [
+            {
+              "id": 750253,
+              "name": "отдельная функция",
+              "key": "0000000001 750253"
+            }
+          ],
+          "expandable": false
+        },
+        "93383": {
+          "values": [
+            {
+              "id": 750273,
+              "name": "отдельная функция",
+              "key": "0000000001 750273"
+            },
+            {
+              "id": 750283,
+              "name": "включена в программу",
+              "key": "0000000002 750283"
+            }
+          ],
+          "expandable": false
+        },
+        "93463": {
+          "values": [
+            {
+              "id": 3000229,
+              "name": "антиаллергенная",
+              "key": "антиаллергенная 3000229"
+            },
+            {
+              "id": 1810949,
+              "name": "бережная",
+              "key": "бережная 1810949"
+            },
+            {
+              "id": 1742848,
+              "name": "быстрая",
+              "key": "быстрая 1742848"
+            },
+            {
+              "id": 750503,
+              "name": "верхняя одежда",
+              "key": "верхняя одежда 750503"
+            },
+            {
+              "id": 750583,
+              "name": "гипоаллергенная",
+              "key": "гипоаллергенная 750583"
+            },
+            {
+              "id": 750443,
+              "name": "деликатная/ручная",
+              "key": "деликатная/ручная 750443"
+            },
+            {
+              "id": 750543,
+              "name": "детские вещи",
+              "key": "детские вещи 750543"
+            },
+            {
+              "id": 750533,
+              "name": "джинсы",
+              "key": "джинсы 750533"
+            }
+          ],
+          "expandable": true
+        },
+        "93473": {
+          "values": [
+            {
+              "id": 750613,
+              "name": "электронное (сенсорное)",
+              "key": "0000000001 750613"
+            },
+            {
+              "id": 750623,
+              "name": "электронное",
+              "key": "0000000002 750623"
+            }
+          ],
+          "expandable": false
+        },
+        "93483": {
+          "values": [
+            {
+              "id": 750663,
+              "name": "символьная",
+              "key": "0000000001 750663"
+            },
+            {
+              "id": 750653,
+              "name": "цифровая",
+              "key": "0000000002 750653"
+            }
+          ],
+          "expandable": false
+        },
+        "93573": {
+          "values": [
+            {
+              "id": 750713,
+              "name": "A+++",
+              "key": "0000000001 750713"
+            },
+            {
+              "id": 750723,
+              "name": "A++",
+              "key": "0000000002 750723"
+            },
+            {
+              "id": 750743,
+              "name": "A",
+              "key": "0000000004 750743"
+            },
+            {
+              "id": 750763,
+              "name": "С",
+              "key": "0000000006 750763"
+            }
+          ],
+          "expandable": false
+        }
+      },
+      "selectedAttributeValues": {
+        "93103": [
+          {
+            "id": 747973,
+            "name": "стиральная машина встраиваемая",
+            "key": "0000000001 747973"
+          }
+        ]
+      },
+      "boolAttributes": [
+        93453,
+        93513,
+        93533,
+        93303,
+        93543,
+        93193,
+        93423,
+        93413,
+        93493,
+        93353,
+        93363,
+        93803,
+        93433
+      ],
+      "deliveryTypes": {
+        "today_or_tomorrow": "Сегодня или завтра",
+        "up_to_5_days": "До 5 дней"
+      }
+    },
+    "requestData": {
+      "templateId": 3773,
+      "minPrice": null,
+      "maxPrice": null,
+      "page": 1,
+      "sortField": "popularity",
+      "sortDirection": "desc",
+      "producerIds": [],
+      "discountTypes": [],
+      "deliveryType": null,
+      "attributes": {
+        "93103": {
+          "id": 93103,
+          "values": [
+            747973
+          ],
+          "range": {
+            "from": null,
+            "to": null,
+            "equals": null
+          },
+          "selected": null
+        }
+      }
+    },
+    "productBlocks": []
+  }
+}

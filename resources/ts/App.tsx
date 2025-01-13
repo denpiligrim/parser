@@ -59,26 +59,6 @@ function App() {
           }
         }
       },
-      MuiPopper: {
-        styleOverrides: {
-          root: {
-            "& .MuiPaper-root": {
-              borderRadius: '15px',
-              border: '1px solid rgba(255, 255, 255, 0.12)'
-            }
-          }
-        }
-      },
-      MuiPopover: {
-        styleOverrides: {
-          root: {
-            "& .MuiMenu-paper": {
-              borderRadius: '15px',
-              border: '1px solid rgba(255, 255, 255, 0.12)'
-            }
-          }
-        }
-      },
       MuiCard: {
         styleOverrides: {
           root: {

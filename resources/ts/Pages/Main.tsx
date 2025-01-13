@@ -14,9 +14,20 @@ const Main: React.FC = () => {
   const [donor, setDonor] = useState('21vek.by');
   const [links, setLinks] = useState('');
 
+  const getGoodsData = (links: string[]) => {
+
+  }
+
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setLoading(true);
+      if (activeStep === 0) {
+        setActiveStep(1);
+        const categoriesLinks = links.split(/[\n,]+/).map(link => link.trim()).filter(link => link.length > 0 && link.startsWith('http'));
+        getGoodsData(categoriesLinks);
+      } else if (activeStep === 2) {
+
+      }
       setTimeout(() => {
         setLoading(false);
         setActiveStep((prevStep) => prevStep + 1);
@@ -39,8 +50,8 @@ const Main: React.FC = () => {
 
   return (
     <Box height="auto" minHeight='100vh'>
-      <Box sx={{ textAlign: 'right' }}>
-        <FormControl variant='filled' sx={{ minWidth: 130 }} size="small">
+      <Box sx={{ textAlign: 'right', backgroundColor: 'rgba(0, 0, 0, 0.06)' }}>
+        <FormControl variant='filled' sx={{ minWidth: 130, backgroundColor: 'white' }} size="small">
           <Select
             value={donor}
             label="Сайт-донор"
