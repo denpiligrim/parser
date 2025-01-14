@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Vek21Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::prefix('api/21vek')->group(function () {
+  Route::post('/productList', [Vek21Controller::class, 'getProductList']);
+  Route::post('/productData', [Vek21Controller::class, 'getProductData']);
+});
 
 Route::view('/{path}', 'welcome', [])
     ->where('path', '.*');
