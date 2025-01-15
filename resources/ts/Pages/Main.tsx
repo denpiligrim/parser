@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Button, CircularProgress, FormControl, MenuItem, Select, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Divider, FormControl, MenuItem, Select, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material';
 import axios from 'axios';
+import ExportCard from '../Components/ExportCard';
+import DataTable from '../Components/DataTable';
 
 const steps = [
   'Ввод данных',
@@ -21,114 +23,146 @@ type CategoryData = {
   products: Product[];
 };
 
-const getGoodsData = (categoryLinks: string[]) => {
-  const allData: CategoryData[] = [];
-  const parsedProducts: CategoryData[] = [];
-  const errors: string[] = [];
-
-  const getLastPartOfPath = (path: string) => {
-    const parts = path.split('/');
-    const lastPart = parts[parts.length - 1];
-    return lastPart.replace(/\.[^/.]+$/, ''); // Remove the file extension
-  };
-
-  for (const link of categoryLinks) {
-    let currentPage = 1;
-    let lastPage = 1;
-    const categoryData: CategoryData = {
-      categoryId: '',
-      categoryName: '',
-      products: [],
-    };
-
-    do {
-      axios.post('/api/21vek/productList', {
-        url: link,
-        page: currentPage,
-      })
-        .then(resp => {
-          const { data } = resp.data.products;
-          const { currentPage: current, lastPage: last } = resp.data.products.meta;
-
-          currentPage = current;
-          lastPage = last;
-
-          if (!categoryData.categoryId) {
-            categoryData.categoryId = resp.data.category.templateId;
-            categoryData.categoryName = resp.data.category.name;
-          }
-
-          const products = data.map((product: any) => ({
-            id: product.code,
-            alias: getLastPartOfPath(product.link),
-          }));
-
-          categoryData.products.push(...products);
-        })
-        .catch(err => {
-          const errorMsg = `Error fetching data for link: ${link}, page: ${currentPage}`;
-          console.error(errorMsg);
-          errors.push(errorMsg);
-        })
-    } while (currentPage < lastPage);
-
-    allData.push(categoryData);
-  }
-
-  for (const category of allData) {
-    const parsedCategory: CategoryData = {
-      categoryId: category.categoryId,
-      categoryName: category.categoryName,
-      products: [],
-    };
-
-    for (const product of category.products) {
-      axios.post('/api/21vek/productData', {
-        alias: product.alias,
-      })
-        .then(resp => {
-          parsedCategory.products.push({
-            ...product,
-            ...resp.data, // Merge the full product info
-          });
-        })
-        .catch(err => {
-          const errorMsg = `Error fetching product data for alias: ${product.alias}`;
-          console.error(errorMsg);
-          errors.push(errorMsg);
-        })
-    }
-
-    parsedProducts.push(parsedCategory);
-  }
-
-  console.log('Errors:', errors);
-  console.log(parsedProducts);
-
-  return parsedProducts;
-};
-
 const Main: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentProcess, setCurrentProcess] = useState('');
+  const [products, setProducts] = useState<CategoryData[]>([]);
   const [donor, setDonor] = useState('21vek.by');
   const [links, setLinks] = useState('');
 
+  const getGoodsData = async (categoryLinks: string[]) => {
+    const allData: CategoryData[] = [];
+    const parsedProducts: CategoryData[] = [];
+    const errors: string[] = [];
+    let totalProducts = 0;
+    const cartegoryPercent = 15 / categoryLinks.length;
+
+    const getLastPartOfPath = (path: string) => {
+      const parts = path.split('/');
+      const lastPart = parts[parts.length - 1];
+      return lastPart.replace(/\.[^/.]+$/, ''); // Remove the file extension
+    };
+
+    setCurrentProcess('Получаем категории');
+    for (const link of categoryLinks) {
+      let currentPage = 1;
+      let lastPage = 1;
+      const categoryData: CategoryData = {
+        categoryId: '',
+        categoryName: '',
+        products: [],
+      };
+
+      do {
+        try {
+          const resp = await axios.post('/api/21vek/productList', {
+            url: link,
+            page: currentPage,
+          });
+
+          if (resp.data.data && resp.data.data.products && resp.data.data.products.meta) {
+            const { data } = resp.data.data.products;
+            const meta = resp.data.data.products.meta;
+
+            // Correctly extract currentPage and lastPage from response
+            lastPage = meta.lastPage;
+
+            if (!categoryData.categoryId) {
+              categoryData.categoryId = resp.data.data.category.templateId || 'Unknown';
+              categoryData.categoryName = resp.data.data.category.name || 'Unknown';
+            }
+
+            const products = data.map((product: any) => ({
+              id: product.code,
+              alias: getLastPartOfPath(product.link),
+            }));
+
+            categoryData.products.push(...products);
+            setCurrentProcess('Получаем список товаров в категории "' + categoryData.categoryName + '"');
+            totalProducts += products.length;            
+          } else {
+            errors.push(`Invalid response format for category link: ${link}, page: ${currentPage}`);
+            break;
+          }
+        } catch (err) {
+          const errorMsg = `Error fetching data for link: ${link}, page: ${currentPage} - ${err.message}`;
+          console.error(errorMsg);
+          errors.push(errorMsg);
+          break; // Exit the pagination loop on error
+        }
+
+        currentPage++; // Increment currentPage AFTER processing the response
+      } while (currentPage <= lastPage); // Ensure loop terminates correctly
+
+      setProgress(prev => prev + cartegoryPercent);            
+      allData.push(categoryData);
+    }
+
+    const productPercent = 85 / totalProducts;
+    
+    // Fetch detailed product information
+    for (const category of allData) {
+      let processedProducts = 0;
+      const parsedCategory: CategoryData = {
+        categoryId: category.categoryId,
+        categoryName: category.categoryName,
+        products: [],
+      };
+
+      for (const product of category.products) {
+        setCurrentProcess(`Загружаем товары в категории "${parsedCategory.categoryName}": ${processedProducts + 1} из ${category.products.length}`);
+        try {
+          const resp = await axios.post('/api/21vek/productData', {
+            alias: product.alias,
+          });
+
+          if (resp.data.data) {
+            parsedCategory.products.push({
+              ...product,
+              categoryName: parsedCategory.categoryName,
+              url: 'https://www.21vek.by' + resp.data.data.link,
+              name: resp.data.data.name,
+              images: resp.data.data.gallery.filter((el: any) => el.type === "image"),
+              price: resp.data.data.prices.salePrice ? resp.data.data.prices.salePrice : resp.data.data.prices.price,
+              monthlyPayment: resp.data.data.prices.salePrice ? Math.floor(resp.data.data.prices.salePrice / 48) : Math.floor(resp.data.data.prices.price / 48),
+              attributes: resp.data.data.attributes
+            });
+          } else {
+            const errorMsg = `Invalid product data for alias: ${product.alias}`;
+            console.error(errorMsg);
+            errors.push(errorMsg);
+          }
+        } catch (err) {
+          const errorMsg = `Error fetching product data for alias: ${product.alias} - ${err.message}`;
+          console.error(errorMsg);
+          errors.push(errorMsg);
+        }
+
+        processedProducts++;
+        setProgress((prev) => prev + productPercent);
+      }
+
+      parsedProducts.push(parsedCategory);
+    }
+
+    setCurrentProcess(`Количество категорий: ${categoryLinks.length}. Количество товаров: ${totalProducts}.`);
+    setProgress(100);
+    setProducts(parsedProducts);
+    console.log('Errors:', errors);
+    console.log('Parsed Products: ', parsedProducts.length);
+    console.log(parsedProducts);
+    setActiveStep(2);
+
+    return parsedProducts;
+  };
+
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
-      setLoading(true);
-      if (activeStep === 0) {
         setActiveStep(1);
         const categoriesLinks = links.split(/[\n,]+/).map(link => link.trim()).filter(link => link.length > 0 && link.startsWith('http'));
         getGoodsData(categoriesLinks);
-      } else if (activeStep === 2) {
-
-      }
-      setTimeout(() => {
-        setLoading(false);
-        setActiveStep((prevStep) => prevStep + 1);
-      }, 2000); // Имитация загрузки
-
     }
   };
 
@@ -171,31 +205,48 @@ const Main: React.FC = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <Box sx={{ textAlign: 'center' }}>
-              <Box>
-                <Typography variant='h5' component='h1'>Введите ссылки на категории товаров</Typography>
-                <Typography variant='caption' component='p' color='textSecondary'>(через запятую или с новой строки)</Typography>
-                <TextField
-                  label="Ссылки на категории"
-                  value={links}
-                  onChange={changeLinks}
-                  multiline
-                  sx={{
-                    width: '100%',
-                    maxWidth: '500px',
-                    my: 4,
-                    backgroundColor: 'white'
-                  }}
-                />
-              </Box>
-              <Box mt={2} sx={{ textAlign: 'center' }}>
-                {activeStep < steps.length - 1 && (
-                  <Button disabled={links.length === 0} variant="contained" onClick={handleNext}>
-                    Далее
-                  </Button>
-                )}
-              </Box>
-            </Box>
+            <>
+              {activeStep === 0 ? (
+                <Box sx={{ textAlign: 'center' }}>
+                  <Box>
+                    <Typography variant='h5' component='h1'>Введите ссылки на категории товаров</Typography>
+                    <Typography variant='caption' component='p' color='textSecondary'>(через запятую или с новой строки)</Typography>
+                    <TextField
+                      label="Ссылки на категории"
+                      value={links}
+                      onChange={changeLinks}
+                      multiline
+                      sx={{
+                        width: '100%',
+                        maxWidth: '500px',
+                        my: 4,
+                        backgroundColor: 'white'
+                      }}
+                    />
+                  </Box>
+                  <Box mt={2} sx={{ textAlign: 'center' }}>
+                    {activeStep < steps.length - 1 && (
+                      <Button disabled={links.length === 0} variant="contained" onClick={handleNext}>
+                        Далее
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              ) : activeStep === 1 ? (
+                <ExportCard progress={progress} currentProcess={currentProcess} />
+              ) : activeStep === 2 ? (
+                <>
+                {products.length > 0 && products.map((el, i) => (
+                  <>
+                  <DataTable data={el.products} />
+                  {i !== products.length - 1 && <Divider variant="middle" component="div" sx={{ maxWidth: 1200, mx: 'auto', mt: 3 }} />}
+                  </>
+                ))}
+                </>
+              ) : (
+                <></>
+              )}
+            </>
           )}
         </Box>
       </Box>
