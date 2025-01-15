@@ -90,11 +90,11 @@ function App() {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      console.clear();
-      console.log("%cText me on Telegram:", "color: black; font-size: 16px; font-weight: bold");
-      console.log("%c@denpiligrim", "color: #207BB2; font-size: 16px; font-weight: bold");
-    }, 1000);
+    // setTimeout(() => {
+    //   console.clear();
+    //   console.log("%cText me on Telegram:", "color: black; font-size: 16px; font-weight: bold");
+    //   console.log("%c@denpiligrim", "color: #207BB2; font-size: 16px; font-weight: bold");
+    // }, 1000);
   }, []);
 
   return (
