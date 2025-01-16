@@ -8,9 +8,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import React, { useState } from 'react';
 
+type CategoryData = {
+  categoryId: string;
+  categoryName: string;
+  products: Product[];
+};
+
 const paginationModel = { page: 0, pageSize: 10 };
 
-export default function DataTable({ data }) {
+export default function DataTable({ data, changeProducts }) {
 
   const [open, setOpen] = useState(false);
   const [currentAttr, setCurrentAttr] = useState(0);
@@ -40,13 +46,13 @@ export default function DataTable({ data }) {
         </IconButton>
       ),
     },
-    {
-      field: 'categoryName',
-      headerName: 'Категория',
-      sortable: false,
-      filterable: false,
-      width: 200
-    },
+    // {
+    //   field: 'categoryName',
+    //   headerName: 'Категория',
+    //   sortable: false,
+    //   filterable: false,
+    //   width: 200
+    // },
     {
       field: 'url',
       headerName: 'Ссылка',
@@ -63,7 +69,7 @@ export default function DataTable({ data }) {
       field: 'images',
       headerName: 'Изображения',
       sortable: false,
-      filterable: false,
+      filterable: false,      
       renderCell: (params: any) => (
         <Box>
           {params.value.map((img, i) => (
@@ -105,13 +111,53 @@ export default function DataTable({ data }) {
     }
   ];
 
+  const updateProductField = (
+    products: CategoryData[],
+    categoryName: string,
+    productIndex: number,
+    fieldName: string,
+    newValue: any
+  ): CategoryData[] => {
+    return products.map((category) => {
+      if (category.categoryName === categoryName) {
+        return {
+          ...category,
+          products: category.products.map((product, index) =>
+            index === productIndex
+              ? { ...product, [fieldName]: newValue }
+              : product
+          ),
+        };
+      }
+      return category;
+    });
+  };
+
+  const updateCategoryName = (
+    products: CategoryData[],
+    categoryName: string,
+    newValue: string
+  ): CategoryData[] => {
+    return products.map((category) =>
+      category.categoryName === categoryName
+        ? { ...category, categoryName: newValue }
+        : category
+    );
+  };
+
+  const changeField = (field: string, i: string | number) => {
+    changeProducts((prevProducts) =>
+      updateProductField(prevProducts, 'Электроника', 0, 'price', 1200)
+    );
+  }
+
   return (
     <>
       <Card sx={{ maxWidth: 1200, margin: 'auto', mt: 3 }}>
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             {data[0].categoryName}
-            <IconButton aria-label="delete" size="small" title='Редактировать категорию'>
+            <IconButton aria-label="delete" size="small" title='Редактировать категорию' onClick={() => changeField('categoryName', data[0].categoryName)}>
               <EditIcon fontSize="inherit" />
             </IconButton>
           </Typography>
@@ -121,7 +167,7 @@ export default function DataTable({ data }) {
                 return {
                   id: i + 1,
                   siteLink: el.url,
-                  categoryName: el.categoryName,
+                  // categoryName: el.categoryName,
                   url: el.url,
                   name: el.name,
                   images: el.images,
@@ -174,6 +220,20 @@ export default function DataTable({ data }) {
               </TableContainer>
             </React.Fragment>
           ))}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Закрыть</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>
+          Характеристики товара
+          <CloseIcon sx={{ float: 'right', cursor: 'pointer', "&:hover": { opacity: '.7' } }} onClick={handleClose} />
+        </DialogTitle>
+        <DialogContent>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Закрыть</Button>

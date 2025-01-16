@@ -238,7 +238,7 @@ const Main: React.FC = () => {
                 <>
                 {products.length > 0 && products.map((el, i) => (
                   <React.Fragment key={'table' + i}>
-                  <DataTable data={el.products} />
+                  <DataTable data={el.products} changeProducts={setProducts} />
                   {i !== products.length - 1 && <Divider variant="middle" component="div" sx={{ maxWidth: 1200, mx: 'auto', mt: 3 }} />}
                   </React.Fragment>
                 ))}
