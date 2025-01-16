@@ -87,7 +87,7 @@ const Main: React.FC = () => {
             break;
           }
         } catch (err) {
-          const errorMsg = `Error fetching data for link: ${link}, page: ${currentPage} - ${err.message}`;
+          const errorMsg = `Error fetching data for link: ${link}, page: ${currentPage}`;
           console.error(errorMsg);
           errors.push(errorMsg);
           break; // Exit the pagination loop on error
@@ -124,7 +124,7 @@ const Main: React.FC = () => {
               categoryName: parsedCategory.categoryName,
               url: 'https://www.21vek.by' + resp.data.data.link,
               name: resp.data.data.name,
-              images: resp.data.data.gallery.filter((el: any) => el.type === "image"),
+              images: resp.data.data.gallery.filter((el: any) => el.type === "image").map(el => el.fullSize || el.preview || el.miniature),
               price: resp.data.data.prices.salePrice ? resp.data.data.prices.salePrice : resp.data.data.prices.price,
               monthlyPayment: resp.data.data.prices.salePrice ? Math.floor(resp.data.data.prices.salePrice / 48) : Math.floor(resp.data.data.prices.price / 48),
               attributes: resp.data.data.attributes
@@ -135,7 +135,7 @@ const Main: React.FC = () => {
             errors.push(errorMsg);
           }
         } catch (err) {
-          const errorMsg = `Error fetching product data for alias: ${product.alias} - ${err.message}`;
+          const errorMsg = `Error fetching product data for alias: ${product.alias}`;
           console.error(errorMsg);
           errors.push(errorMsg);
         }
@@ -237,10 +237,10 @@ const Main: React.FC = () => {
               ) : activeStep === 2 ? (
                 <>
                 {products.length > 0 && products.map((el, i) => (
-                  <>
+                  <React.Fragment key={'table' + i}>
                   <DataTable data={el.products} />
                   {i !== products.length - 1 && <Divider variant="middle" component="div" sx={{ maxWidth: 1200, mx: 'auto', mt: 3 }} />}
-                  </>
+                  </React.Fragment>
                 ))}
                 </>
               ) : (
