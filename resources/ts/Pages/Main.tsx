@@ -3,6 +3,7 @@ import { Box, Button, CircularProgress, Divider, FormControl, MenuItem, Select, 
 import axios from 'axios';
 import ExportCard from '../Components/ExportCard';
 import DataTable from '../Components/DataTable';
+import GenerateFile from '../Components/GenerateFile';
 
 const steps = [
   'Ввод данных',
@@ -31,6 +32,7 @@ const Main: React.FC = () => {
   const [products, setProducts] = useState<CategoryData[]>([]);
   const [donor, setDonor] = useState('21vek.by');
   const [links, setLinks] = useState('');
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const getGoodsData = async (categoryLinks: string[]) => {
     const allData: CategoryData[] = [];
@@ -81,7 +83,7 @@ const Main: React.FC = () => {
 
             categoryData.products.push(...products);
             setCurrentProcess('Получаем список товаров в категории "' + categoryData.categoryName + '"');
-            totalProducts += products.length;            
+            totalProducts += products.length;
           } else {
             errors.push(`Invalid response format for category link: ${link}, page: ${currentPage}`);
             break;
@@ -96,12 +98,12 @@ const Main: React.FC = () => {
         currentPage++; // Increment currentPage AFTER processing the response
       } while (currentPage <= lastPage); // Ensure loop terminates correctly
 
-      setProgress(prev => prev + cartegoryPercent);            
+      setProgress(prev => prev + cartegoryPercent);
       allData.push(categoryData);
     }
 
     const productPercent = 85 / totalProducts;
-    
+
     // Fetch detailed product information
     for (const category of allData) {
       let processedProducts = 0;
@@ -160,9 +162,9 @@ const Main: React.FC = () => {
 
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
-        setActiveStep(1);
-        const categoriesLinks = links.split(/[\n,]+/).map(link => link.trim()).filter(link => link.length > 0 && link.startsWith('http'));
-        getGoodsData(categoriesLinks);
+      setActiveStep(1);
+      const categoriesLinks = links.split(/[\n,]+/).map(link => link.trim()).filter(link => link.length > 0 && link.startsWith('http'));
+      getGoodsData(categoriesLinks);
     }
   };
 
@@ -193,7 +195,7 @@ const Main: React.FC = () => {
       </Box>
       <Box p={3}>
         <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
+          {steps.map((label, i) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
             </Step>
@@ -236,15 +238,22 @@ const Main: React.FC = () => {
                 <ExportCard progress={progress} currentProcess={currentProcess} />
               ) : activeStep === 2 ? (
                 <>
-                {products.length > 0 && products.map((el, i) => (
-                  <React.Fragment key={'table' + i}>
-                  <DataTable data={el.products} changeProducts={setProducts} />
-                  {i !== products.length - 1 && <Divider variant="middle" component="div" sx={{ maxWidth: 1200, mx: 'auto', mt: 3 }} />}
-                  </React.Fragment>
-                ))}
+                  {products.length > 0 && products.map((el, i) => (
+                    <React.Fragment key={'table' + i}>
+                      <DataTable data={el.products} categoryName={el.categoryName} changeProducts={setProducts} />
+                      {i !== products.length - 1 && <Divider variant="middle" component="div" sx={{ maxWidth: 1200, mx: 'auto', mt: 3 }} />}
+                    </React.Fragment>
+                  ))}
+                  <Box mt={2} sx={{ textAlign: 'center' }}>
+                    {activeStep < steps.length - 1 && (
+                      <Button variant="contained" onClick={() => setActiveStep(3)}>
+                        Далее
+                      </Button>
+                    )}
+                  </Box>
                 </>
               ) : (
-                <></>
+                <GenerateFile products={products} changeCompleted={setIsCompleted} />
               )}
             </>
           )}

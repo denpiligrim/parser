@@ -1,12 +1,19 @@
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { ruRU } from '@mui/x-data-grid/locales';
 import Paper from '@mui/material/Paper';
-import { Box, Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Tooltip, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CloseIcon from '@mui/icons-material/Close';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import InfoIcon from '@mui/icons-material/Info';
 import React, { useState } from 'react';
+
+type Product = {
+  id: string;
+  alias: string;
+  [key: string]: any;
+};
 
 type CategoryData = {
   categoryId: string;
@@ -16,10 +23,14 @@ type CategoryData = {
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-export default function DataTable({ data, changeProducts }) {
+export default function DataTable({ data, categoryName, changeProducts }) {
 
   const [open, setOpen] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openFieldModal, setOpenFieldModal] = useState(false);
   const [currentAttr, setCurrentAttr] = useState(0);
+  const [currentProduct, setCurrentProduct] = useState(0);
+  const [currentField, setCurrentField] = useState('url');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,6 +38,21 @@ export default function DataTable({ data, changeProducts }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenEditModal = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false);
+  };
+  const handleClickOpenFieldModal = () => {
+    setOpenFieldModal(true);
+  };
+
+  const handleCloseFieldModal = () => {
+    setOpenFieldModal(false);
   };
 
   const columns: GridColDef[] = [
@@ -58,18 +84,42 @@ export default function DataTable({ data, changeProducts }) {
       headerName: 'Ссылка',
       sortable: false,
       filterable: false,
+      renderCell: (params: GridRenderCellParams<any, Date>) => (
+        <>
+          <IconButton size="small" title='Редактировать url' onClick={() => {
+            setCurrentField('url');
+            setCurrentProduct(parseInt(params.id as string) - 1);
+            handleClickOpenFieldModal();
+          }}>
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+          {params.value.toString()}
+        </>
+      ),
       width: 150
     },
     {
       field: 'name',
       headerName: 'Название товара',
+      renderCell: (params: GridRenderCellParams<any, Date>) => (
+        <>
+          <IconButton size="small" title='Редактировать название товара' onClick={() => {
+            setCurrentField('name');
+            setCurrentProduct(parseInt(params.id as string) - 1);
+            handleClickOpenFieldModal();
+          }}>
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+          {params.value.toString()}
+        </>
+      ),
       width: 200
     },
     {
       field: 'images',
       headerName: 'Изображения',
       sortable: false,
-      filterable: false,      
+      filterable: false,
       renderCell: (params: any) => (
         <Box>
           {params.value.map((img, i) => (
@@ -83,12 +133,36 @@ export default function DataTable({ data, changeProducts }) {
       field: 'price',
       headerName: 'Цена',
       type: 'number',
+      renderCell: (params: GridRenderCellParams<any, Date>) => (
+        <>
+          <IconButton size="small" title='Редактировать цену товара' onClick={() => {
+            setCurrentField('price');
+            setCurrentProduct(parseInt(params.id as string) - 1);
+            handleClickOpenFieldModal();
+          }}>
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+          {params.value.toString()}
+        </>
+      ),
       width: 100,
     },
     {
       field: 'monthlyPayment',
       headerName: 'Оплата частями',
       description: 'Оплата частями при расчете на 48 месяцев без первого взноса.',
+      renderCell: (params: GridRenderCellParams<any, Date>) => (
+        <>
+          <IconButton size="small" title='Редактировать оплату частями' onClick={() => {
+            setCurrentField('monthlyPayment');
+            setCurrentProduct(parseInt(params.id as string) - 1);
+            handleClickOpenFieldModal();
+          }}>
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+          {params.value.toString()}
+        </>
+      ),
       width: 100
     },
     {
@@ -98,7 +172,7 @@ export default function DataTable({ data, changeProducts }) {
       filterable: false,
       renderCell: (params: GridRenderCellParams<any, Date>) => (
         <>
-          <IconButton aria-label="delete" size="small" title='Посмотреть характеристики' onClick={() => {
+          <IconButton size="small" title='Посмотреть характеристики' onClick={() => {
             setCurrentAttr(parseInt(params.id as string) - 1);
             handleClickOpen();
           }}>
@@ -145,9 +219,15 @@ export default function DataTable({ data, changeProducts }) {
     );
   };
 
-  const changeField = (field: string, i: string | number) => {
+  const changeCategory = (newValue: string) => {
     changeProducts((prevProducts) =>
-      updateProductField(prevProducts, 'Электроника', 0, 'price', 1200)
+      updateCategoryName(prevProducts, categoryName, newValue)
+    );
+  }
+
+  const changeField = (productIndex: number, fieldName: string, newValue: string) => {
+    changeProducts((prevProducts) =>
+      updateProductField(prevProducts, categoryName, productIndex, fieldName, newValue)
     );
   }
 
@@ -156,8 +236,8 @@ export default function DataTable({ data, changeProducts }) {
       <Card sx={{ maxWidth: 1200, margin: 'auto', mt: 3 }}>
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
-            {data[0].categoryName}
-            <IconButton aria-label="delete" size="small" title='Редактировать категорию' onClick={() => changeField('categoryName', data[0].categoryName)}>
+            {categoryName}
+            <IconButton size="small" title='Редактировать категорию' onClick={handleClickOpenEditModal}>
               <EditIcon fontSize="inherit" />
             </IconButton>
           </Typography>
@@ -167,7 +247,6 @@ export default function DataTable({ data, changeProducts }) {
                 return {
                   id: i + 1,
                   siteLink: el.url,
-                  // categoryName: el.categoryName,
                   url: el.url,
                   name: el.name,
                   images: el.images,
@@ -211,7 +290,16 @@ export default function DataTable({ data, changeProducts }) {
                         key={'groupItem' + i}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
-                        <TableCell align="left" sx={{ color: "primary.main" }}>{item.name}</TableCell>
+                        <TableCell align="left" sx={{ color: "primary.main" }}>
+                          {item.itemDescription && (
+                            <Tooltip arrow title={<div dangerouslySetInnerHTML={{ __html: item.itemDescription }} />}>
+                              <IconButton size="small" title='Описание'>
+                                <InfoIcon fontSize="inherit" />
+                              </IconButton>
+                            </Tooltip>
+                          )}
+                          {item.name}
+                        </TableCell>
                         <TableCell align="left">{item.value}</TableCell>
                       </TableRow>
                     ))}
@@ -226,17 +314,45 @@ export default function DataTable({ data, changeProducts }) {
         </DialogActions>
       </Dialog>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={openEditModal}
+        onClose={handleCloseEditModal}
+        maxWidth='md'
+        sx={{
+          '.MuiDialog-paper': {
+            width: '100%'
+          }
+        }}
       >
         <DialogTitle>
-          Характеристики товара
-          <CloseIcon sx={{ float: 'right', cursor: 'pointer', "&:hover": { opacity: '.7' } }} onClick={handleClose} />
+          Редактирование категории
+          <CloseIcon sx={{ float: 'right', cursor: 'pointer', "&:hover": { opacity: '.7' } }} onClick={handleCloseEditModal} />
         </DialogTitle>
         <DialogContent>
+          <TextField fullWidth variant="outlined" value={categoryName} onChange={e => changeCategory(e.target.value)} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Закрыть</Button>
+          <Button onClick={handleCloseEditModal}>Закрыть</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openFieldModal}
+        onClose={handleCloseFieldModal}
+        maxWidth='md'        
+        sx={{
+          '.MuiDialog-paper': {
+            width: '100%'
+          }
+        }}
+      >
+        <DialogTitle>
+          Редактирование поля
+          <CloseIcon sx={{ float: 'right', cursor: 'pointer', "&:hover": { opacity: '.7' } }} onClick={handleCloseFieldModal} />
+        </DialogTitle>
+        <DialogContent>
+          <TextField fullWidth variant="outlined" value={data[currentProduct][currentField]} onChange={e => changeField(currentProduct, currentField, e.target.value)} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseFieldModal}>Закрыть</Button>
         </DialogActions>
       </Dialog>
     </>
