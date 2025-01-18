@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Grid2 as Grid,
   Card,
   CardContent,
   CardActions,
@@ -9,9 +10,11 @@ import {
   FormGroup,
   Typography,
   Divider,
+  Radio,
 } from '@mui/material';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 type Product = {
   url: string;
@@ -31,18 +34,24 @@ type CategoryData = {
 type ExportCardProps = {
   products: any;
   changeCompleted: any;
+  goBack: any;
 };
 
-const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted }) => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, goBack }) => {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(products.map(c => c.categoryName));
   const [selectedFormats, setSelectedFormats] = useState<string[]>(['CSV']);
+  const [selectedArgument, setSelectedArgument] = useState<string[]>(['в одном файле']);
 
   const handleCategoryChange = (categoryName: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(categoryName)
-        ? prev.filter((c) => c !== categoryName)
-        : [...prev, categoryName]
-    );
+    if (products.length === 1) {
+      setSelectedCategories([products[0].categoryName]);
+    } else {
+      setSelectedCategories((prev) =>
+        prev.includes(categoryName)
+          ? prev.filter((c) => c !== categoryName)
+          : [...prev, categoryName]
+      );
+    }
   };
 
   const handleFormatChange = (format: string) => {
@@ -58,49 +67,82 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted }) 
       alert('Выберите хотя бы один формат файла!');
       return;
     }
+
     changeCompleted(true);
 
     const zip = new JSZip();
     const filesToDownload: { name: string; blob: Blob }[] = [];
 
     const filteredProducts =
-      selectedCategories.length === 0
+      selectedCategories.length === products.length
         ? products
         : products.filter((category) =>
-            selectedCategories.includes(category.categoryName)
-          );
+          selectedCategories.includes(category.categoryName)
+        );
 
     for (const format of selectedFormats) {
-      for (const category of filteredProducts) {
-        const fileName =
-          selectedCategories.length === 0
-            ? `all_categories.${format.toLowerCase()}`
-            : `${category.categoryName}.${format.toLowerCase()}`;
-
+      if (selectedArgument.includes('в одном файле')) {
+        // Генерация одного файла для всех категорий
+        const fileName = `Все категории.${format.toLowerCase()}`;
         let content = '';
+
         if (format === 'CSV') {
-          content = generateCSV(category.products);
+          content = generateCSV(filteredProducts.flatMap((c) => c.products));
         } else if (format === 'XLSX') {
-          content = generateXLSX(category.products); // Replace with actual XLSX generation
+          const excelBuffer = generateXLSX(
+            filteredProducts.flatMap((c) => c.products)
+          );
+          const blob = new Blob([excelBuffer], {
+            type: 'application/octet-stream',
+          });
+          filesToDownload.push({ name: fileName, blob });
+          continue;
         } else if (format === 'YML') {
-          content = generateYML(category.products);
+          content = generateYML(filteredProducts.flatMap((c) => c.products));
         }
 
-        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const blob = new Blob([content], {
+          type: format === 'XLSX' ? 'application/octet-stream' : 'text/plain;charset=utf-8',
+        });
 
-        if (filteredProducts.length > 1 || selectedFormats.length > 1) {
+        filesToDownload.push({ name: fileName, blob });
+      } else {
+        // Генерация отдельного файла для каждой категории
+        for (const category of filteredProducts) {
+          const fileName = `${category.categoryName}.${format.toLowerCase()}`;
+          let content = '';
+
+          if (format === 'CSV') {
+            content = generateCSV(category.products);
+          } else if (format === 'XLSX') {
+            const excelBuffer = generateXLSX(category.products);
+            const blob = new Blob([excelBuffer], {
+              type: 'application/octet-stream',
+            });
+            filesToDownload.push({ name: fileName, blob });
+            continue;
+          } else if (format === 'YML') {
+            content = generateYML(category.products);
+          }
+
+          const blob = new Blob([content], {
+            type: format === 'XLSX' ? 'application/octet-stream' : 'text/plain;charset=utf-8',
+          });
+
           zip.file(fileName, blob);
-        } else {
-          filesToDownload.push({ name: fileName, blob });
         }
       }
     }
 
-    if (Object.keys(zip.files).length > 0) {
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
-      saveAs(zipBlob, 'export.zip');
+    if (filesToDownload.length === 1) {
+      // Если только один файл, скачиваем его напрямую
+      const { name, blob } = filesToDownload[0];
+      saveAs(blob, name);
     } else {
-      filesToDownload.forEach((file) => saveAs(file.blob, file.name));
+      // Создание ZIP-архива для нескольких файлов
+      filesToDownload.forEach(({ name, blob }) => zip.file(name, blob));
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      saveAs(zipBlob, 'Экспорт.zip');
     }
   };
 
@@ -124,8 +166,7 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted }) 
         (product) =>
           `  <product>\n    <url>${product.url}</url>\n    <name>${product.name}</name>\n    <images>${product.images.join(
             ', '
-          )}</images>\n    <price>${product.price}</price>\n    <monthlyPayment>${
-            product.monthlyPayment || ''
+          )}</images>\n    <price>${product.price}</price>\n    <monthlyPayment>${product.monthlyPayment || ''
           }</monthlyPayment>\n    <attributes>${JSON.stringify(
             product.attributes
           )}</attributes>\n  </product>`
@@ -133,8 +174,33 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted }) 
       .join('\n')}\n</products>`;
   };
 
-  const generateXLSX = (products: Product[]): string => {
-    return `XLSX generation placeholder for ${products.length} products.`;
+  const generateXLSX = (products: Product[]): any => {
+    const worksheetData = [
+      ['URL', 'Name', 'Images', 'Price', 'Monthly Payment', 'Attributes'], // Заголовки
+      ...products.map((product) => [
+        product.url,
+        product.name,
+        product.images.join('; '),
+        product.price,
+        product.monthlyPayment || '',
+        JSON.stringify(product.attributes),
+      ]),
+    ];
+
+    // Создаём рабочий лист
+    const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+    // Создаём книгу
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Products');
+
+    // Генерируем файл в формате Blob
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+
+    return excelBuffer;
   };
 
   return (
@@ -147,22 +213,22 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted }) 
           Выберите категории:
         </Typography>
         <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={selectedCategories.length === 0}
-                onChange={() =>
-                  setSelectedCategories(
-                    selectedCategories.length === 0
-                      ? products.map((category) => category.categoryName)
-                      : []
-                  )
+          {products.length > 1 && (
+            <>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={selectedCategories.length === products.length}
+                    onChange={(e, checked) =>
+                      setSelectedCategories(checked ? products.map(c => c.categoryName) : [])
+                    }
+                  />
                 }
+                label="Все категории"
               />
-            }
-            label="Все категории"
-          />
-          <Divider component="div" />
+              <Divider component="div" />
+            </>
+          )}
           {products.map((category) => (
             <FormControlLabel
               key={category.categoryName}
@@ -176,26 +242,52 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted }) 
             />
           ))}
         </FormGroup>
-        <Typography variant="subtitle1" color="textSecondary" gutterBottom mt={2}>
-          Выберите формат файла:
-        </Typography>
-        <FormGroup>
-          {['CSV', 'XLSX', 'YML'].map((format) => (
-            <FormControlLabel
-              key={format}
-              control={
-                <Checkbox
-                  checked={selectedFormats.includes(format)}
-                  onChange={() => handleFormatChange(format)}
+        <Grid container>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <Typography variant="subtitle1" color="textSecondary" gutterBottom mt={2}>
+              Выберите формат файла:
+            </Typography>
+            <FormGroup>
+              {['CSV', 'XLSX', 'YML'].map((format) => (
+                <FormControlLabel
+                  key={format}
+                  control={
+                    <Checkbox
+                      checked={selectedFormats.includes(format)}
+                      onChange={() => handleFormatChange(format)}
+                    />
+                  }
+                  label={format}
                 />
-              }
-              label={format}
-            />
-          ))}
-        </FormGroup>
+              ))}
+            </FormGroup>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <Typography variant="subtitle1" color="textSecondary" gutterBottom mt={2}>
+              Параметры выгрузки категорий:
+            </Typography>
+            <FormGroup>
+              {['в одном файле', 'раздельно'].map((arg) => (
+                <FormControlLabel
+                  key={arg}
+                  control={
+                    <Radio
+                      checked={selectedArgument.includes(arg)}
+                      onChange={() => setSelectedArgument([arg])}
+                    />
+                  }
+                  label={arg}
+                />
+              ))}
+            </FormGroup>
+          </Grid>
+        </Grid>
       </CardContent>
       <CardActions sx={{ justifyContent: 'center' }}>
-        <Button variant="contained"  color="primary" onClick={generateFiles}>
+        <Button variant="text" color="primary" onClick={() => goBack(2)}>
+          Назад
+        </Button>
+        <Button variant="contained" color="primary" onClick={generateFiles}>
           Экспорт
         </Button>
       </CardActions>

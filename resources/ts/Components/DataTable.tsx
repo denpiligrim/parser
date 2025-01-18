@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridRowSelectionModel } from '@mui/x-data-grid';
 import { ruRU } from '@mui/x-data-grid/locales';
 import Paper from '@mui/material/Paper';
 import { Box, Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Tooltip, Typography } from '@mui/material';
@@ -7,6 +7,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CloseIcon from '@mui/icons-material/Close';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InfoIcon from '@mui/icons-material/Info';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState } from 'react';
 
 type Product = {
@@ -31,6 +32,9 @@ export default function DataTable({ data, categoryName, changeProducts }) {
   const [currentAttr, setCurrentAttr] = useState(0);
   const [currentProduct, setCurrentProduct] = useState(0);
   const [currentField, setCurrentField] = useState('url');
+  const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>([]);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [currentImage, setCurrentImage] = useState<string | null>(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,6 +57,16 @@ export default function DataTable({ data, categoryName, changeProducts }) {
 
   const handleCloseFieldModal = () => {
     setOpenFieldModal(false);
+  };
+  
+  const handleOpenImageModal = (imageUrl: string) => {
+    setCurrentImage(imageUrl);
+    setOpenImageModal(true);
+  };
+
+  const handleCloseImageModal = () => {
+    setCurrentImage(null);
+    setOpenImageModal(false);
   };
 
   const columns: GridColDef[] = [
@@ -123,7 +137,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
       renderCell: (params: any) => (
         <Box>
           {params.value.map((img, i) => (
-            <img key={'image' + i} src={img} alt='Image' height={50} style={{ border: '1px solid #bdbdbd', margin: '1px' }} />
+            <img key={'image' + i} src={img} alt='Image' height={50} style={{ border: '1px solid #bdbdbd', margin: '1px', cursor: 'zoom-in' }} onClick={() => handleOpenImageModal(img)} />
           ))}
         </Box>
       ),
@@ -231,6 +245,22 @@ export default function DataTable({ data, categoryName, changeProducts }) {
     );
   }
 
+  const handleDeleteSelected = () => {
+    changeProducts(prev => {
+      return prev.map((category) => {
+        if (category.categoryName === categoryName) {
+          return {
+            ...category,
+            products: category.products.filter(
+              (_, index) => !selectionModel.includes(index + 1) // Исключаем товары с указанными индексами
+            ),
+          };
+        }
+        return category;
+      })
+    });
+  };
+
   return (
     <>
       <Card sx={{ maxWidth: 1200, margin: 'auto', mt: 3 }}>
@@ -242,6 +272,18 @@ export default function DataTable({ data, categoryName, changeProducts }) {
             </IconButton>
           </Typography>
           <Paper sx={{ height: 'auto', width: '100%' }}>
+            <Box display="flex" justifyContent="flex-end" mb={2}>
+              <Button
+                variant="contained"
+                size='small'
+                color="primary"
+                startIcon={<DeleteIcon />}
+                onClick={handleDeleteSelected}
+                disabled={selectionModel.length === 0} // Кнопка активна только при выделении
+              >
+                Удалить выбранные {selectionModel.length > 0 && '(' + selectionModel.length + ')'}
+              </Button>
+            </Box>
             <DataGrid
               rows={data.map((el: any, i: number) => {
                 return {
@@ -259,8 +301,11 @@ export default function DataTable({ data, categoryName, changeProducts }) {
               initialState={{ pagination: { paginationModel } }}
               pageSizeOptions={[10, 20, 40]}
               checkboxSelection
+              disableRowSelectionOnClick
               localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
               sx={{ border: 0 }}
+              onRowSelectionModelChange={(newSelection) => setSelectionModel(newSelection)}
+              rowSelectionModel={selectionModel}
             />
           </Paper>
         </CardContent>
@@ -337,7 +382,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
       <Dialog
         open={openFieldModal}
         onClose={handleCloseFieldModal}
-        maxWidth='md'        
+        maxWidth='md'
         sx={{
           '.MuiDialog-paper': {
             width: '100%'
@@ -354,6 +399,38 @@ export default function DataTable({ data, categoryName, changeProducts }) {
         <DialogActions>
           <Button onClick={handleCloseFieldModal}>Закрыть</Button>
         </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openImageModal}
+        onClose={handleCloseImageModal}
+        fullScreen
+        PaperProps={{
+          style: { backgroundColor: 'transparent', boxShadow: 'none' },
+        }}
+      >
+        <DialogContent
+          onClick={handleCloseImageModal}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+            cursor: 'zoom-out',
+          }}
+        >
+          {currentImage && (
+            <img
+              src={currentImage}
+              alt="Full-size"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                cursor: 'zoom-out',
+                objectFit: 'contain',
+              }}
+            />
+          )}
+        </DialogContent>
       </Dialog>
     </>
   );

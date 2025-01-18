@@ -163,7 +163,8 @@ const Main: React.FC = () => {
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep(1);
-      const categoriesLinks = links.split(/[\n,]+/).map(link => link.trim()).filter(link => link.length > 0 && link.startsWith('http'));
+      let categoriesLinks = links.split(/[\n,]+/).map(link => link.trim()).filter(link => link.length > 0 && link.startsWith('http'));
+      categoriesLinks = categoriesLinks.filter((item, index) => categoriesLinks.indexOf(item) === index);
       getGoodsData(categoriesLinks);
     }
   };
@@ -240,7 +241,7 @@ const Main: React.FC = () => {
                 <>
                   {products.length > 0 && products.map((el, i) => (
                     <React.Fragment key={'table' + i}>
-                      <DataTable data={el.products} categoryName={el.categoryName} changeProducts={setProducts} />
+                      {el.products.length > 0 && <DataTable data={el.products} categoryName={el.categoryName} changeProducts={setProducts} />}
                       {i !== products.length - 1 && <Divider variant="middle" component="div" sx={{ maxWidth: 1200, mx: 'auto', mt: 3 }} />}
                     </React.Fragment>
                   ))}
@@ -253,7 +254,7 @@ const Main: React.FC = () => {
                   </Box>
                 </>
               ) : (
-                <GenerateFile products={products} changeCompleted={setIsCompleted} />
+                <GenerateFile products={products} changeCompleted={setIsCompleted} goBack={setActiveStep} />
               )}
             </>
           )}
