@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('api/21vek')->group(function () {
   Route::post('/productList', [Vek21Controller::class, 'getProductList']);
   Route::post('/productData', [Vek21Controller::class, 'getProductData']);
+  Route::get('/productImages', [Vek21Controller::class, 'getProductImages']);
 });
 
 Route::view('/{path}', 'welcome', [])

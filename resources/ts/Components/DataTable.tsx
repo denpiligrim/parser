@@ -58,7 +58,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
   const handleCloseFieldModal = () => {
     setOpenFieldModal(false);
   };
-  
+
   const handleOpenImageModal = (imageUrl: string) => {
     setCurrentImage(imageUrl);
     setOpenImageModal(true);
@@ -137,7 +137,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
       renderCell: (params: any) => (
         <Box>
           {params.value.map((img, i) => (
-            <img key={'image' + i} src={img} alt='Image' height={50} style={{ border: '1px solid #bdbdbd', margin: '1px', cursor: 'zoom-in' }} onClick={() => handleOpenImageModal(img)} />
+            <img key={'image' + i} src={img} loading='lazy' alt='Image' height={50} style={{ border: '1px solid #bdbdbd', margin: '1px', cursor: 'zoom-in' }} onClick={() => handleOpenImageModal(img)} />
           ))}
         </Box>
       ),
@@ -259,6 +259,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
         return category;
       })
     });
+    setSelectionModel([]);
   };
 
   return (
@@ -311,6 +312,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
         </CardContent>
       </Card>
       <Dialog
+        closeAfterTransition={false}
         open={open}
         onClose={handleClose}
       >
@@ -359,6 +361,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
         </DialogActions>
       </Dialog>
       <Dialog
+        closeAfterTransition={false}
         open={openEditModal}
         onClose={handleCloseEditModal}
         maxWidth='md'
@@ -380,6 +383,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
         </DialogActions>
       </Dialog>
       <Dialog
+        closeAfterTransition={false}
         open={openFieldModal}
         onClose={handleCloseFieldModal}
         maxWidth='md'
@@ -401,6 +405,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
         </DialogActions>
       </Dialog>
       <Dialog
+        closeAfterTransition={false}
         open={openImageModal}
         onClose={handleCloseImageModal}
         fullScreen
@@ -422,6 +427,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
             <img
               src={currentImage}
               alt="Full-size"
+              loading='lazy'
               style={{
                 maxWidth: '100%',
                 maxHeight: '100%',

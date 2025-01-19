@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Button, CircularProgress, Divider, FormControl, MenuItem, Select, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Divider, FormControl, FormControlLabel, FormGroup, MenuItem, Select, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import ExportCard from '../Components/ExportCard';
 import DataTable from '../Components/DataTable';
 import GenerateFile from '../Components/GenerateFile';
+import * as cheerio from 'cheerio';
 
 const steps = [
   'Ввод данных',
@@ -24,6 +25,53 @@ type CategoryData = {
   products: Product[];
 };
 
+async function getImages(query: string, count: number): Promise<string[]> {
+  try {
+    // Формируем URL для поиска
+    const apiURL = `/api/21vek/productImages?text=${encodeURIComponent(query)}`;
+    const response = await axios.get(apiURL, {
+      headers: {
+        'Accept': 'text/html',
+      },
+    });
+
+    // Загружаем HTML в Cheerio
+    const $ = cheerio.load(response.data);
+
+    // Ищем div с id, который начинается с ImagesApp
+    const imagesAppDiv = $("div[id^='ImagesApp']");
+
+    if (!imagesAppDiv.length) {
+      throw new Error("Не удалось найти элемент с id, начинающимся на 'ImagesApp'");
+    }
+
+    // Получаем JSON из атрибута data-state
+    const dataState = imagesAppDiv.attr("data-state");
+    if (!dataState) {
+      throw new Error("Не удалось найти атрибут data-state в элементе");
+    }
+
+    // Парсим JSON
+    const data = JSON.parse(dataState);
+    const entities = data?.initialState?.serpList?.items?.entities;
+
+    if (!entities) {
+      throw new Error("Не удалось найти entities в data.initialState.serpList.items");
+    }
+
+    // Берем первые `count` изображений
+    const imageLinks = Object.values(entities)
+      .filter((entity: any) => entity?.origUrl) // Фильтруем только объекты с origUrl
+      .slice(0, count) // Ограничиваем количество изображений
+      .map((entity: any) => entity.origUrl);
+
+    return imageLinks;
+  } catch (error) {
+    console.error("Ошибка при получении изображений:", error);
+    return [];
+  }
+}
+
 const Main: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -33,6 +81,7 @@ const Main: React.FC = () => {
   const [donor, setDonor] = useState('21vek.by');
   const [links, setLinks] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
+  const [checkedImages, setCheckedImages] = useState(true);
 
   const getGoodsData = async (categoryLinks: string[]) => {
     const allData: CategoryData[] = [];
@@ -121,12 +170,16 @@ const Main: React.FC = () => {
           });
 
           if (resp.data.data) {
+            const gallery = resp.data.data.gallery.filter((el: any) => el.type === "image").map(el => el.fullSize || el.preview || el.miniature);
+            let updatedGallery = [];
+            if (checkedImages) updatedGallery = await getImages(resp.data.data.name, gallery.length);
+
             parsedCategory.products.push({
               ...product,
               categoryName: parsedCategory.categoryName,
               url: 'https://www.21vek.by' + resp.data.data.link,
               name: resp.data.data.name,
-              images: resp.data.data.gallery.filter((el: any) => el.type === "image").map(el => el.fullSize || el.preview || el.miniature),
+              images: checkedImages && updatedGallery.length > 0 ? updatedGallery : gallery,
               price: resp.data.data.prices.salePrice ? resp.data.data.prices.salePrice : resp.data.data.prices.price,
               monthlyPayment: resp.data.data.prices.salePrice ? Math.floor(resp.data.data.prices.salePrice / 48) : Math.floor(resp.data.data.prices.price / 48),
               attributes: resp.data.data.attributes
@@ -153,8 +206,6 @@ const Main: React.FC = () => {
     setProgress(100);
     setProducts(parsedProducts);
     console.log('Errors:', errors);
-    console.log('Parsed Products: ', parsedProducts.length);
-    console.log(parsedProducts);
     setActiveStep(2);
 
     return parsedProducts;
@@ -226,6 +277,26 @@ const Main: React.FC = () => {
                         backgroundColor: 'white'
                       }}
                     />
+                  </Box>
+                  <Box>
+                    <FormGroup>
+                      <FormControlLabel
+                        sx={{
+                          width: '100%',
+                          maxWidth: '500px',
+                          mx: 'auto'
+                        }}
+                        control={
+                          <Checkbox
+                            checked={checkedImages}
+                            onChange={(e, checked) =>
+                              setCheckedImages(checked)
+                            }
+                          />
+                        }
+                        label="Загружать картинки из Яндекса"
+                      />
+                    </FormGroup>
                   </Box>
                   <Box mt={2} sx={{ textAlign: 'center' }}>
                     {activeStep < steps.length - 1 && (

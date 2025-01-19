@@ -83,7 +83,7 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
     for (const format of selectedFormats) {
       if (selectedArgument.includes('в одном файле')) {
         // Генерация одного файла для всех категорий
-        const fileName = `Все категории.${format.toLowerCase()}`;
+        const fileName = selectedCategories.length === 1 ? `${filteredProducts[0].categoryName}.${format.toLowerCase()}` : `Все категории.${format.toLowerCase()}`;
         let content = '';
 
         if (format === 'CSV') {
