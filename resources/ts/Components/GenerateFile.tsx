@@ -147,7 +147,7 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
   };
 
   const generateCSV = (products: Product[]): string => {
-    const headers = ['URL', 'Name', 'Images', 'Price', 'Monthly Payment', 'Attributes'];
+    const headers = ['product_url', 'product_name', 'product_image', 'product_price', 'product_monthly_payment', 'product_attributes'];
     const rows = products.map((product) => [
       product.url,
       product.name,
@@ -164,19 +164,19 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
     return `<products>\n${products
       .map(
         (product) =>
-          `  <product>\n    <url>${product.url}</url>\n    <name>${product.name}</name>\n    <images>${product.images.join(
+          `  <product>\n    <product_url>${product.url}</product_url>\n    <product_name>${product.name}</product_name>\n    <product_image>${product.images.join(
             ', '
-          )}</images>\n    <price>${product.price}</price>\n    <monthlyPayment>${product.monthlyPayment || ''
-          }</monthlyPayment>\n    <attributes>${JSON.stringify(
+          )}</product_image>\n    <product_price>${product.price}</product_price>\n    <product_monthly_payment>${product.monthlyPayment || ''
+          }</product_monthly_payment>\n    <product_attributes>${JSON.stringify(
             product.attributes
-          )}</attributes>\n  </product>`
+          )}</product_attributes>\n  </product>`
       )
       .join('\n')}\n</products>`;
   };
 
   const generateXLSX = (products: Product[]): any => {
     const worksheetData = [
-      ['URL', 'Name', 'Images', 'Price', 'Monthly Payment', 'Attributes'], // Заголовки
+      ['product_url', 'product_name', 'product_image', 'product_price', 'product_monthly_payment', 'product_attributes'], // Заголовки
       ...products.map((product) => [
         product.url,
         product.name,
