@@ -17,11 +17,13 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 
 type Product = {
+  categoryName: string;
   url: string;
   name: string;
   images: string[];
   price: number;
   monthlyPayment?: number;
+  description: string;
   attributes: Record<string, any>;
 };
 
@@ -39,7 +41,7 @@ type ExportCardProps = {
 
 const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, goBack }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>(products.map(c => c.categoryName));
-  const [selectedFormats, setSelectedFormats] = useState<string[]>(['CSV']);
+  const [selectedFormats, setSelectedFormats] = useState<string[]>(['XLSX']);
   const [selectedArgument, setSelectedArgument] = useState<string[]>(['в одном файле']);
 
   const handleCategoryChange = (categoryName: string) => {
@@ -89,9 +91,7 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
         if (format === 'CSV') {
           content = generateCSV(filteredProducts.flatMap((c) => c.products));
         } else if (format === 'XLSX') {
-          const excelBuffer = generateXLSX(
-            filteredProducts.flatMap((c) => c.products)
-          );
+          const excelBuffer = generateXLSX(filteredProducts.flatMap((c) => c.products));
           const blob = new Blob([excelBuffer], {
             type: 'application/octet-stream',
           });
@@ -147,14 +147,13 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
   };
 
   const generateCSV = (products: Product[]): string => {
-    const headers = ['product_url', 'product_name', 'product_image', 'product_price', 'product_monthly_payment', 'product_attributes'];
+    const headers = ['Категория', 'Название', 'Фото', 'Цена', 'Описание'];
     const rows = products.map((product) => [
-      product.url,
+      product.categoryName,
       product.name,
-      product.images.join('; '),
+      product.images.length > 0 ? product.images[0] : '',
       product.price,
-      product.monthlyPayment || '',
-      JSON.stringify(product.attributes),
+      product.description
     ]);
 
     return [headers.join(','), ...rows.map((row) => row.join(','))].join('\n');
@@ -164,26 +163,27 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
     return `<products>\n${products
       .map(
         (product) =>
-          `  <product>\n    <product_url>${product.url}</product_url>\n    <product_name>${product.name}</product_name>\n    <product_image>${product.images.join(
-            ', '
-          )}</product_image>\n    <product_price>${product.price}</product_price>\n    <product_monthly_payment>${product.monthlyPayment || ''
-          }</product_monthly_payment>\n    <product_attributes>${JSON.stringify(
-            product.attributes
-          )}</product_attributes>\n  </product>`
+          `  <product>\n   <product_category>${product.categoryName}</product_category>\n    <product_name>${product.name}</product_name>\n    <product_image>${product.images.length > 0 ? product.images[0] : ''}</product_image>\n    <product_price>${product.price}</product_price>\n    <product_description>${product.description || ''
+          }</product_description>\n    <product_attributes>
+          ${product.attributes.map(attr => {
+          return '<product_attribute_group>' + '<product_attribute_group_name>' + attr.group + '</product_attribute_group_name>' + attr.groupItems.map(item => {
+            return '<product_attribute_group_item>' + '<product_attribute_group_item_name>' + item.name + '</product_attribute_group_item_name> ' + '<product_attribute_group_item_value>' + item.value + '</product_attribute_group_item_value>' + '</product_attribute_group_item>'
+          }) + '</product_attribute_group>'
+        })}
+          </product_attributes>\n  </product>`
       )
       .join('\n')}\n</products>`;
   };
 
   const generateXLSX = (products: Product[]): any => {
     const worksheetData = [
-      ['product_url', 'product_name', 'product_image', 'product_price', 'product_monthly_payment', 'product_attributes'], // Заголовки
+      ['Категория', 'Название', 'Фото', 'Цена', 'Описание'], // Заголовки
       ...products.map((product) => [
-        product.url,
+        product.categoryName,
         product.name,
-        product.images.join('; '),
+        product.images.length > 0 ? product.images[0] : '',
         product.price,
-        product.monthlyPayment || '',
-        JSON.stringify(product.attributes),
+        getProductDescriptionHTML(product.description, product.attributes)
       ]),
     ];
 
@@ -202,6 +202,17 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
 
     return excelBuffer;
   };
+
+  function getProductDescriptionHTML(descr, attr) {
+    const d = `<p>${descr}</p>`;
+    const attributes = attr.map(attr => {
+      return '<h4>' + attr.group + '</h4>' + attr.groupItems.map(item => {
+        return '<p>' + '<b>' + item.name + ':</b> ' + item.value + '</p>'
+      }).join('')
+    }).join('');
+
+    return d + '<h3>Характеристики</h3>' + attributes;
+  }
 
   return (
     <Card sx={{ maxWidth: 600, margin: 'auto', mt: 5 }}>
@@ -248,7 +259,7 @@ const GenerateFile: React.FC<ExportCardProps> = ({ products, changeCompleted, go
               Выберите формат файла:
             </Typography>
             <FormGroup>
-              {['CSV', 'XLSX', 'YML'].map((format) => (
+              {['XLSX', 'CSV', 'YML'].map((format) => (
                 <FormControlLabel
                   key={format}
                   control={

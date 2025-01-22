@@ -182,7 +182,8 @@ const Main: React.FC = () => {
               images: checkedImages && updatedGallery.length > 0 ? updatedGallery : gallery,
               price: resp.data.data.prices.salePrice ? resp.data.data.prices.salePrice : resp.data.data.prices.price,
               monthlyPayment: resp.data.data.prices.salePrice ? Math.floor(resp.data.data.prices.salePrice / 48) : Math.floor(resp.data.data.prices.price / 48),
-              attributes: resp.data.data.attributes
+              attributes: resp.data.data.attributes,
+              description: resp.data.data.description
             });
           } else {
             const errorMsg = `Invalid product data for alias: ${product.alias}`;

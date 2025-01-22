@@ -93,25 +93,25 @@ export default function DataTable({ data, categoryName, changeProducts }) {
     //   filterable: false,
     //   width: 200
     // },
-    {
-      field: 'url',
-      headerName: 'Ссылка',
-      sortable: false,
-      filterable: false,
-      renderCell: (params: GridRenderCellParams<any, Date>) => (
-        <>
-          <IconButton size="small" title='Редактировать url' onClick={() => {
-            setCurrentField('url');
-            setCurrentProduct(parseInt(params.id as string) - 1);
-            handleClickOpenFieldModal();
-          }}>
-            <EditIcon fontSize="inherit" />
-          </IconButton>
-          {params.value.toString()}
-        </>
-      ),
-      width: 150
-    },
+    // {
+    //   field: 'url',
+    //   headerName: 'Ссылка',
+    //   sortable: false,
+    //   filterable: false,
+    //   renderCell: (params: GridRenderCellParams<any, Date>) => (
+    //     <>
+    //       <IconButton size="small" title='Редактировать url' onClick={() => {
+    //         setCurrentField('url');
+    //         setCurrentProduct(parseInt(params.id as string) - 1);
+    //         handleClickOpenFieldModal();
+    //       }}>
+    //         <EditIcon fontSize="inherit" />
+    //       </IconButton>
+    //       {params.value.toString()}
+    //     </>
+    //   ),
+    //   width: 150
+    // },
     {
       field: 'name',
       headerName: 'Название товара',
@@ -162,13 +162,12 @@ export default function DataTable({ data, categoryName, changeProducts }) {
       width: 100,
     },
     {
-      field: 'monthlyPayment',
-      headerName: 'Оплата частями',
-      description: 'Оплата частями при расчете на 48 месяцев без первого взноса.',
+      field: 'description',
+      headerName: 'Описание товара',
       renderCell: (params: GridRenderCellParams<any, Date>) => (
         <>
-          <IconButton size="small" title='Редактировать оплату частями' onClick={() => {
-            setCurrentField('monthlyPayment');
+          <IconButton size="small" title='Редактировать описание товара' onClick={() => {
+            setCurrentField('description');
             setCurrentProduct(parseInt(params.id as string) - 1);
             handleClickOpenFieldModal();
           }}>
@@ -177,7 +176,7 @@ export default function DataTable({ data, categoryName, changeProducts }) {
           {params.value.toString()}
         </>
       ),
-      width: 100
+      width: 200
     },
     {
       field: 'attributes',
@@ -290,11 +289,10 @@ export default function DataTable({ data, categoryName, changeProducts }) {
                 return {
                   id: i + 1,
                   siteLink: el.url,
-                  url: el.url,
                   name: el.name,
                   images: el.images,
                   price: el.price,
-                  monthlyPayment: el.monthlyPayment,
+                  description: el.description,
                   attributes: el.attributes
                 }
               })}
