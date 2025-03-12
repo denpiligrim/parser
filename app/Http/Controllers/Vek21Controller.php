@@ -58,7 +58,7 @@ class Vek21Controller extends Controller
         try {
             // Формируем URL для поиска
             $url = "https://yandex.ru/images/search?text=" . urlencode($query);
-            sleep(1);
+            sleep(2);
 
             // Отправляем GET-запрос к Яндексу
             $response = Http::withHeaders([
